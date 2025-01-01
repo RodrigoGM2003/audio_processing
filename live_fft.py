@@ -7,8 +7,10 @@ p = pyaudio.PyAudio()
 
 seconds = 10
 
+# Calculate the live spectrogram
 spectrogram = utils.calculate_live_spectrogam(p=p, input_device_index=utils.select_microphone(p=p), seconds=seconds,)
 
+# Plot the live spectrogram
 fig, ax = plt.subplots(1, 1, figsize=(15, 5))
 ax.imshow(spectrogram, aspect='auto', origin='lower', cmap='inferno',  extent=[0, seconds, 0, 44100 / 2])
 ax.set_title('Live Spectrogram')

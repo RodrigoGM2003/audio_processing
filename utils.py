@@ -113,11 +113,6 @@ def _record_live_audio(p: pyaudio.PyAudio, input_device_index: int, frames: Queu
     stream.close()
     
     frames.put(None)  # Signal the end of the recording
-    # # Save the recorded audio to a file
-    
-    # audio = np.frombuffer(b''.join(audio), dtype=np.int16)
-    # utils.save_audio(p, audio, rate=rate, filename="./audios/live_record.wav", channels=channels, format=format)
-    
     
     p.terminate()
     recording_status[0] = False
