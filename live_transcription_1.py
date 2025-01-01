@@ -99,7 +99,7 @@ def process_audio(q):
 
             text = ""
             try:
-                text = recognizer.recognize_google(audio, language='es-ES')
+                text = recognizer.recognize_google(audio)
             except sr.UnknownValueError:
                 text = ""
                 

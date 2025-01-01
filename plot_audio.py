@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import utils
 
-obj = wave.open('./audios/live_record_plot.wav','rb')
+obj = wave.open('./audios/record.wav','rb')
 
 signal = obj.readframes(-1)
 nframes = obj.getnframes()

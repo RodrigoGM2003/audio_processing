@@ -31,19 +31,6 @@ _THRESHOLD = 0.01
 
 
 def mean_energy_vad(data: np.ndarray, window_size: int=_WINDOW_SIZE, overlap: int=_OVERLAP, threshold: float=_THRESHOLD):
-    """
-    Applies average energy-based Voice Activity Detection (VAD) to the audio data.
-
-    Args:
-        data (np.array): Audio data as a NumPy array.
-        window_size (int, optional): Size of the analysis window. Defaults to 16384.
-        overlap (int, optional): Number of samples to overlap between windows. Defaults to 512.
-        threshold (float, optional): Energy threshold for VAD. Defaults to 1.
-
-    Returns:
-        np.array: VAD mask as a NumPy array.
-        list: Energy values for each analysis window.
-    """
     vad_mask = []
     energy_array = []
 
@@ -58,17 +45,7 @@ def mean_energy_vad(data: np.ndarray, window_size: int=_WINDOW_SIZE, overlap: in
 
 
 def postprocess_speech(data: np.ndarray, vad_result: np.ndarray):
-    """
-    Postprocesses the speech data based on the VAD (Voice Activity Detection) result.
 
-    Args:
-        data (np.ndarray): The input speech data.
-        vad_result (np.ndarray): The VAD result indicating the presence of speech.
-
-    Returns:
-        np.ndarray: The postprocessed speech data.
-
-    """
     window_length = math.ceil(len(data) / len(vad_result))
     expanded_vad_result = np.repeat(vad_result, window_length)
     expanded_vad_result = expanded_vad_result[:len(data)]

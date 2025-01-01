@@ -7,7 +7,7 @@ import wave
 import time
 
 p = pyaudio.PyAudio()
-audio = wave.open("./audios/live_record.wav", "rb")
+audio = wave.open("./audios/record.wav", "rb")
 
 frames = audio.readframes(audio.getnframes())
 frames = np.frombuffer(frames, dtype=np.int16)
@@ -37,28 +37,6 @@ def calculate_spectrogram(signal, fs, window_size, overlap):
         # print(spectrogram.shape, flush=True)
         
     return spectrogram
-
-
-
-# def calculate_spectrogram(signal, fs, window_size, overlap):
-#     # Calculate the step size and number of segments
-#     step_size = window_size - overlap
-#     n_segments = (len(signal) - window_size) // step_size + 1
-
-#     # Initialize the spectrogram with zeros
-#     spectrogram = np.zeros((window_size // 2 + 1, n_segments))
-
-#     # Apply a Hamming window function
-#     window = np.hamming(window_size)
-
-#     # Calculate the spectrogram
-#     for i in range(n_segments):
-#         start = i * step_size
-#         end = start + window_size
-#         segment = signal[start:end] * window
-#         _, _, Z = stft(segment, fs, nperseg=window_size)
-#         spectrogram[:, i] = np.mean(10 * np.log10(np.abs(Z)**2), axis=1)
-#     return spectrogram
 
 
 NFFT = 3200
@@ -108,4 +86,6 @@ ax[1].set_ylim(0, 7000)
 # ax[1].set_ylabel('Frequency')
 # ax[1].set_ylim(0, 10000)
 plt.show()
+
+
 

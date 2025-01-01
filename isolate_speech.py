@@ -7,7 +7,7 @@ from queue import Queue
 import utils
 import math
 
-obj = wave.open('./audios/speech.wav','rb')
+obj = wave.open('./audios/record.wav','rb')
 
 frames = obj.readframes(-1)
 data = np.frombuffer(frames, dtype=np.int16)
@@ -36,7 +36,7 @@ def eficient_energy_vad(data, threshold=20, window_size=16384, overlap=128):
     return vad_mask, energy_array
 
 
-threshold = 0.01
+threshold = 0.1
 
 
 def extract_speech(data, threshold, window_size, overlap):
@@ -59,8 +59,8 @@ expanded_vad_result = expanded_vad_result[:len(normalized_data)]
 
 # Now, expanded_vad_result has the same shape as normalized_data, and you can multiply them
 speech_data = expanded_vad_result * normalized_data
-# speech_data = data[expanded_vad_result.astype(bool)]
-# speech_data = data[expanded_vad_result == 1]
+speech_data = data[expanded_vad_result.astype(bool)]
+speech_data = data[expanded_vad_result == 1]
 
 fig,ax = plt.subplots(4,1, figsize=(15, 15))
 ax[0].plot(data)
@@ -77,13 +77,11 @@ ax[3].set_title('Speech Data')
 
 plt.show()
 
-
-
 # Save the audio data without silence
 #change the format of the audio to be able to save it
-speech_data = (speech_data * (2**15 - 1)).astype(np.int16)
+# speech_data = (speech_data * (2**15 - 1)).astype(np.int16)
 
 
 p = pyaudio.PyAudio()
-utils.save_audio(p, speech_data, rate=44100, filename='./audios/speech_avg.wav', format=pyaudio.paInt16, channels=1)
+utils.save_audio(p, speech_data, rate=44100, filename='./audios/mi_result.wav', format=pyaudio.paInt16, channels=1)
 p.terminate()

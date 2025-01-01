@@ -74,43 +74,6 @@ def plot_audio(audio_data: np.array, rate: int, channels: int = 1):
     plt.show()
 
 
-# def _record_live_audio(p: pyaudio.PyAudio, input_device_index: int, frames: Queue,
-#                       recording_status: list, seconds: int = RECORD_SECONDS,
-#                       format: int = FORMAT, channels: int = CHANNELS, rate: int = RATE,
-#                       frames_per_buffer: int = FRAMES_PER_BUFFER):
-#     """
-#     Records live audio from the selected input device.
-
-#     Args:
-#         p (pyaudio.PyAudio): PyAudio instance.
-#         input_device_index (int): Index of the input device to use.
-#         frames (Queue): Queue to store the recorded audio frames.
-#         recording_status (list): List to track the recording status.
-#         seconds (int, optional): Duration of the recording in seconds. Defaults to RECORD_SECONDS.
-#         format (int, optional): Audio format. Defaults to FORMAT.
-#         channels (int, optional): Number of audio channels. Defaults to CHANNELS.
-#         rate (int, optional): Sample rate of the audio. Defaults to RATE.
-#         frames_per_buffer (int, optional): Number of frames per buffer. Defaults to FRAMES_PER_BUFFER.
-#     """
-#     stream = p.open(
-#         format=format,
-#         channels=channels,
-#         rate=rate,
-#         input=True,
-#         frames_per_buffer=frames_per_buffer,
-#         input_device_index=input_device_index
-#     )
-
-#     print("Recording...")
-
-#     for i in range(0, int(rate / frames_per_buffer * seconds)):
-#         data = stream.read(frames_per_buffer)
-#         frames.put(data)
-
-#     stream.stop_stream()
-#     stream.close()
-#     p.terminate()
-#     recording_status[0] = False
 def _record_live_audio(p: pyaudio.PyAudio, input_device_index: int, frames: Queue,
                       recording_status: list, seconds: int = RECORD_SECONDS,
                       format: int = FORMAT, channels: int = CHANNELS, rate: int = RATE,
